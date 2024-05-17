@@ -1,10 +1,12 @@
 using SimpleBlog.Infrastructure.Extensions;
 using SimpleBlog.API.Extensions;
+using SimpleBlog.API.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddApplicationDbContext();
 builder.Services.AddAppIdentity(builder.Configuration);
+builder.Services.AddAppServices();
 
 
 builder.Services.AddControllers();
@@ -13,6 +15,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddAppSwagger();
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

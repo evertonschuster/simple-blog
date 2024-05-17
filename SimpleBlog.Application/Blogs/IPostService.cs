@@ -11,5 +11,7 @@ namespace SimpleBlog.Application.Blogs
         Task<PostDto> UpdateAsync(PostDto postDto);
 
         Task DeleteAsync(Guid id);
+
+        Task<IEnumerable<PostDto>> ListAllAsync();
     }
 }

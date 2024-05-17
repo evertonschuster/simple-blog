@@ -20,4 +20,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SimpleBlog.Domain\SimpleBlog.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

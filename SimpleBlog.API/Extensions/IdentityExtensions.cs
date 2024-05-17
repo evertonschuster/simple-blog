@@ -10,6 +10,8 @@ namespace SimpleBlog.API.Extensions
     {
         public static IServiceCollection AddAppIdentity(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddHttpContextAccessor();
+
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();

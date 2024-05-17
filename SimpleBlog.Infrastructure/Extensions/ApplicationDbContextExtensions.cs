@@ -10,6 +10,7 @@ namespace SimpleBlog.Infrastructure.Extensions
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite("Data Source=site.db", b => b.MigrationsAssembly("SimpleBlog.API")));
 
+            services.AddAppRepository();
             return services;
         }
     }
