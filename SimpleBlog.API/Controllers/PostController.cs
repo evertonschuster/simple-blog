@@ -62,8 +62,9 @@ namespace SimpleBlog.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PostDto))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> UpdateAsync(PostDto postDto)
+        public async Task<IActionResult> UpdateAsync(PostDto postDto, Guid id)
         {
+            postDto.Id = id;
             var post = await _postService.UpdateAsync(postDto);
             if (post == null)
             {

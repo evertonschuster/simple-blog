@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-
-namespace SimpleBlog.API.Models
+﻿namespace SimpleBlog.API.Models
 {
     public record LoginModel
     {

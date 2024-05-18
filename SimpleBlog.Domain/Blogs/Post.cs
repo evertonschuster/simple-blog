@@ -7,7 +7,7 @@ namespace SimpleBlog.Domain.Blogs
     {
         public Post() { }
 
-        public Post(string title, string body, List<string> tags, Guid createdBy)
+        public Post(string title, string? body, List<string> tags, Guid createdBy)
         {
             Title = title;
             Body = body;
@@ -17,23 +17,36 @@ namespace SimpleBlog.Domain.Blogs
 
         public string Title { get; private set; }
 
-        public string Body { get; private set; }
+        public string? Body { get; private set; }
 
         public List<string> Tags { get; private set; }
 
-        public static Post Create(string title, string body, List<string> tags, Guid createdBy)
+        public void Update(string title, string body, List<string> tags)
         {
-            if(string.IsNullOrWhiteSpace(title))
-            {
-                throw new TitleWhiteSpaceException();
-            }
+            ValidateTitle(title);
+
+            Title = title;
+            Body = body;
+            Tags = tags;
+        }
+
+        public static Post Create(string title, string? body, List<string> tags, Guid createdBy)
+        {
+            ValidateTitle(title);
 
             return new Post(title, body, tags, createdBy);
         }
 
-        public void Update(string title, string body, List<string> tags)
+        private static void ValidateTitle(string title)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(title))
+            {
+                throw new TitleWhiteSpaceException();
+            }
+            if (title.Length > 100)
+            {
+                throw new TitleTooLongException();
+            }
         }
     }
 }

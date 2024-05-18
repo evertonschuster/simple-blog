@@ -63,5 +63,11 @@ namespace SimpleBlog.Application.Blogs
 
             return PostDto.From(model);
         }
+
+        public async Task<IEnumerable<PostDto>> ListAllAsync()
+        {
+            var models = await _postRepository.ListAllAsync();
+            return models.Select(PostDto.From);
+        }
     }
 }

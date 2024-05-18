@@ -1,6 +1,6 @@
-using SimpleBlog.Infrastructure.Extensions;
 using SimpleBlog.API.Extensions;
 using SimpleBlog.API.Middlewares;
+using SimpleBlog.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 

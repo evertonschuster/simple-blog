@@ -9,9 +9,9 @@ namespace SimpleBlog.Application.Blogs.Dtos
 
         public required string Title { get; set; }
 
-        public required string Body { get; set; }
+        public string? Body { get; set; }
 
-        public List<string> Tags { get; set; }
+        public List<string>? Tags { get; set; }
 
         public static PostDto From(Post model)
         {
