@@ -1,4 +1,5 @@
 using SimpleBlog.API.Extensions;
+using SimpleBlog.API.Hubs;
 using SimpleBlog.API.Middlewares;
 using SimpleBlog.Infrastructure.Extensions;
 
@@ -6,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddApplicationDbContext();
 builder.Services.AddAppIdentity(builder.Configuration);
+builder.Services.AddSignalR();
 builder.Services.AddAppServices();
 
 
@@ -31,5 +33,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapHub<NotificationHub>("/notifications");
 
 app.Run();

@@ -8,13 +8,15 @@ namespace SimpleBlog.Application.Blogs
 {
     public class PostService : IPostService
     {
+        private readonly IPostNotificationService _postNotification;
         private readonly IPostRepository _postRepository;
         private readonly IUser _user;
 
-        public PostService(IPostRepository postRepository, IUser user)
+        public PostService(IPostRepository postRepository, IUser user, IPostNotificationService postNotification)
         {
             _postRepository = postRepository;
             _user = user;
+            _postNotification = postNotification;
         }
 
         public async Task<PostDto> CreateAsync(PostDto postDto)
@@ -23,8 +25,11 @@ namespace SimpleBlog.Application.Blogs
             var model = postDto.ToModel(userId);
 
             model = await _postRepository.CreateAsync(model);
+            var dto = PostDto.From(model);
 
-            return PostDto.From(model);
+            await _postNotification.CreatedPost(dto);
+
+            return dto;
         }
 
         public async Task DeleteAsync(Guid id)

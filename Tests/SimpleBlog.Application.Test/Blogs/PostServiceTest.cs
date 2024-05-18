@@ -10,15 +10,17 @@ namespace SimpleBlog.Application.Test.Blogs
 {
     public class PostServiceTest
     {
+        private readonly IPostNotificationService _postNotification;
         private readonly IPostRepository _postRepository;
         private readonly IUser _user;
         private readonly PostService _postService;
 
         public PostServiceTest()
         {
+            _postNotification = Substitute.For<IPostNotificationService>();
             _postRepository = Substitute.For<IPostRepository>();
             _user = Substitute.For<IUser>();
-            _postService = new PostService(_postRepository, _user);
+            _postService = new PostService(_postRepository, _user, _postNotification);
 
             _user.Id.Returns(Guid.NewGuid());
         }
